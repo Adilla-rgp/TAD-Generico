@@ -1,45 +1,44 @@
-````
 # TAD Genérico
 
-Este repositório contém a implementação de um **Tipo Abstrato de Dados (TAD) Genérico**, desenvolvido para oferecer flexibilidade e reutilização em diferentes contextos de programação.
+Este repositório contém a implementação de um **Tipo Abstrato de Dados (TAD) Genérico**, desenvolvido para oferecer flexibilidade e reutilização em diversos contextos de programação em C.
 
-## Ambiente de Execução  
+## Ambiente de Execução
 
-Este programa foi desenvolvido e testado no seguinte ambiente:  
+O projeto foi desenvolvido e testado nos seguintes ambientes:
+
 - **Sistema Operacional:** Ubuntu 22.04 / Windows 10  
 - **Compilador:** GCC 11.3.0 (Linux) / MinGW (Windows)  
-- **Dependências:** Nenhuma específica, apenas um compilador C/C++  
+- **Dependências:** Nenhuma específica além de um compilador C/C++
 
-## Estrutura do Arquivo  
+## Estrutura dos Arquivos
 
-O arquivo compactado contém os seguintes itens:  
-- `README.md` → Este documento com instruções de uso  
-- `tad_generico.c` → Código-fonte do programa  
-- `tad_generico.h` → Arquivo de cabeçalho do TAD  
-- `executavel` → Arquivo executável compilado do programa  
+O pacote compactado inclui os seguintes arquivos:
 
-## Como Executar  
+- `README.md` — Este documento com instruções de uso  
+- `tad_generico.c` — Código-fonte principal  
+- `tad_generico.h` — Arquivo de cabeçalho do TAD  
+- `executavel` / `executavel.exe` — Executável gerado (opcional)
 
-Para compilar e executar o programa, siga os passos:  
+## 🛠️ Como Compilar e Executar
 
-**Linux/macOS:**  
+**No Linux/macOS:**
 ```sh
 gcc -o executavel tad_generico.c
 ./executavel
 ```
 
-**Windows:**  
+**No Windows:**
 ```sh
 gcc -o executavel.exe tad_generico.c
 executavel.exe
 ```
 
-## Objetivo  
+## Objetivo
 
-Este projeto tem como objetivo demonstrar a implementação de um TAD Genérico, possibilitando operações como inserção, remoção e busca de elementos de maneira eficiente.
+Demonstrar a implementação de um TAD genérico em C, permitindo operações como **inserção**, **remoção** e **busca** de elementos de forma eficiente e reaproveitável.
 
-## Contribuições  
+## Contribuições
 
-Caso tenha sugestões ou melhorias, fique à vontade para contribuir!
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests com melhorias, correções ou sugestões.
 
-
+---
