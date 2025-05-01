@@ -89,6 +89,6 @@ Este trabalho demonstra o uso de TADs genéricos em C como ferramenta para a org
 **Disciplina:** Estrutura de Dados  
 **Aluno:** Ádilla Roberta Gomes Pereira  
 **Professor:** Anselmo Paiva  
-**Data de Entrega:** 09 de maio
+**Data de Entrega:** 09 de maio de 2025
 
 ---
