@@ -18,3 +18,12 @@ Colecao* criarColecao(int capacidade) {
 
     return nova;
 }
+
+int inserirDisco(Colecao *c, Disco d){
+    if(c == NULL || c->tamanho >= c->capacidade){
+        return 0; 
+    }
+    c->discos[c->tamanho] = d;
+    c->tamanho++;
+    return 1; 
+} 
