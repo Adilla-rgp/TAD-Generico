@@ -16,6 +16,8 @@ typedef struct {
 
 
 Colecao* criarColecao(int capacidade);
+int inserirDisco(Colecao *c, Disco d);
+
  
 
 
