@@ -17,6 +17,12 @@ typedef struct {
 
 Colecao* criarColecao(int capacidade);
 int inserirDisco(Colecao *c, Disco d);
+int removerDisco(Colecao *c, int indice); 
+int obterTamanho(Colecao* c);
+Disco obterDisco(Colecao* c, int indice);
+Disco* listarDiscos(Colecao* c, int* tamanho); 
+Disco* consultarDisco(Colecao* c, const char* nomeDoDisco); 
+void esvaziarColecao(Colecao* c); 
 
  
 
