@@ -1,30 +1,43 @@
 #ifndef COLECAO_H
 #define COLECAO_H
-#define CAPACIDADE_INICIAL 10 // Número inicial de discos na coleção 
 
-typedef struct {
-    char nomeDoDisco[30];
+#define CAPACIDADE_INICIAL 10
+
+// Definição do tipo Disco, representando um álbum musical
+typedef struct
+{
+    char nomeDoDisco[100];
     int numeroDeMusicas;
     float notaDoAlbum;
 } Disco;
 
-typedef struct {
-    Disco *discos; // Vetor dinâmico para armazenar os discos
-    int capacidade;
-    int tamanho;   // Quantidade atual de discos
+// Definição da coleção, que armazena múltiplos discos dinamicamente
+typedef struct
+{
+    Disco *elementos;  // ponteiro para array dinâmico de discos
+    int tamanho;       // número atual de discos armazenados
+    int capacidade;    // capacidade máxima atual do array
 } Colecao;
 
+// Função que cria uma coleção com capacidade inicial definida
+Colecao *criarColecao(int capacidadeInicial);
 
-Colecao* criarColecao(int capacidade);
-int inserirDisco(Colecao *c, Disco d);
-int removerDisco(Colecao *c, int indice); 
-int obterTamanho(Colecao* c);
-Disco obterDisco(Colecao* c, int indice);
-Disco* listarDiscos(Colecao* c, int* tamanho); 
-Disco* consultarDisco(Colecao* c, const char* nomeDoDisco); 
-void esvaziarColecao(Colecao* c); 
+// Insere um disco na coleção, redimensionando se necessário
+int inserirDisco(Colecao *colecao, Disco d);
 
- 
+// Remove um disco pelo índice; retorna 1 se sucesso, 0 se índice inválido
+int removerDisco(Colecao *colecao, int indice);
 
+// Consulta um disco pelo nome; retorna ponteiro para disco ou NULL se não encontrado
+Disco *consultarDisco(Colecao *colecao, const char *nomeDoDisco);
 
-#endif 
+// Lista todos os discos, retornando um array copiado e o tamanho via parâmetro
+Disco *listarDiscos(Colecao *colecao, int *tamanho);
+
+// Esvazia a coleção, removendo todos os discos (mas não desaloca a estrutura)
+void esvaziarColecao(Colecao *colecao);
+
+// Retorna o número de discos atualmente armazenados
+int obterTamanho(Colecao *colecao);
+
+#endif
