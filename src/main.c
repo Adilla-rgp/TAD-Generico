@@ -18,90 +18,85 @@ void exibirMenu()
 int main()
 {
     int opcao;
-    Colecao *minhaColecao = NULL; // Definindo minhaColecao como ponteiro para Colecao
+    Colecao *minhaColecao = NULL;  // Ponteiro para a coleção, inicialmente NULL
 
     do
     {
         exibirMenu();
         scanf("%d", &opcao);
-
-        while (getchar() != '\n')
-            ; // Limpa o buffer do teclado
+        while (getchar() != '\n'); // Limpa o buffer do teclado após leitura
 
         switch (opcao)
         {
         case 1:
+            // Criar a coleção se ainda não existir
             if (minhaColecao != NULL)
             {
                 printf("Colecao ja foi criada anteriormente.\n");
             }
             else
             {
-                minhaColecao = criarColecao(CAPACIDADE_INICIAL); // Cria a coleção com capacidade inicial
+                minhaColecao = criarColecao(CAPACIDADE_INICIAL);
                 if (minhaColecao != NULL)
-                {
                     printf("Colecao criada com sucesso!\n");
-                }
                 else
-                {
                     printf("Erro ao criar a colecao.\n");
-                }
             }
             break;
 
         case 2:
+            // Inserir um novo disco na coleção
             if (minhaColecao == NULL)
             {
                 printf("Crie a colecao primeiro.\n");
                 break;
             }
-
-            Disco d;
-            printf("Nome do disco: ");
-            scanf(" %[^\n]", d.nomeDoDisco);
-            printf("Numero de musicas: ");
-            scanf("%d", &d.numeroDeMusicas);
-            printf("Nota do album: ");
-            scanf("%f", &d.notaDoAlbum);
-
-            if (inserirDisco(minhaColecao, d))
-            {
-                printf("Disco inserido com sucesso!\n");
-            }
             else
             {
-                printf("Erro ao inserir disco.\n");
+                Disco d;
+                printf("Nome do disco: ");
+                scanf(" %[^\n]", d.nomeDoDisco); // Lê linha com espaços
+                printf("Numero de musicas: ");
+                scanf("%d", &d.numeroDeMusicas);
+                printf("Nota do album: ");
+                scanf("%f", &d.notaDoAlbum);
+
+                if (inserirDisco(minhaColecao, d))
+                    printf("Disco inserido com sucesso!\n");
+                else
+                    printf("Erro ao inserir disco.\n");
             }
             break;
 
         case 3:
-            if (minhaColecao == NULL || minhaColecao->tamanho == 0)
+            // Remover disco pelo índice informado
+            if (minhaColecao == NULL || obterTamanho(minhaColecao) == 0)
             {
                 printf("Colecao vazia ou nao criada.\n");
                 break;
             }
-            int indice;
-            printf("Informe o indice do disco a remover: ");
-            scanf("%d", &indice);
-            getchar();
-
-            if (removerDisco(minhaColecao, indice))
-            {
-                printf("Disco removido com sucesso.\n");
-            }
             else
             {
-                printf("Indice invalido.\n");
+                int indice;
+                printf("Informe o indice do disco a remover: ");
+                scanf("%d", &indice);
+                getchar(); // Limpa buffer
+
+                if (removerDisco(minhaColecao, indice))
+                    printf("Disco removido com sucesso.\n");
+                else
+                    printf("Indice invalido.\n");
             }
             break;
 
         case 4:
-            if (minhaColecao == NULL || minhaColecao->tamanho == 0)
+            // Consultar disco pelo nome
+            if (minhaColecao == NULL || obterTamanho(minhaColecao) == 0)
             {
                 printf("Colecao vazia ou nao criada.\n");
                 break;
             }
-            // Consultar disco
+            else
             {
                 char nomeDoDisco[100];
                 printf("Informe o nome do disco a consultar: ");
@@ -112,7 +107,6 @@ int main()
                 if (disco != NULL)
                 {
                     printf("\n----- Disco encontrado! -----\n");
-                    printf("");
                     printf("Nome: %s\n", disco->nomeDoDisco);
                     printf("Numero de musicas: %d\n", disco->numeroDeMusicas);
                     printf("Nota do album: %.1f\n", disco->notaDoAlbum);
@@ -128,30 +122,38 @@ int main()
             break;
 
         case 5:
+            // Listar todos os discos da coleção
             if (minhaColecao == NULL || obterTamanho(minhaColecao) == 0)
             {
-                printf("Coleção vazia.\n");
+                printf("Colecao vazia.\n");
             }
             else
             {
-                int tamanho;
+                int tamanho = 0;
                 Disco *discos = listarDiscos(minhaColecao, &tamanho);
                 if (discos != NULL)
                 {
+                    printf("\n===== Minha Biblioteca Musical ======\n");
                     for (int i = 0; i < tamanho; i++)
                     {
-                        printf("\n===== Minha Biblioteca Musical ======\n");
-                        printf("  Disco %d:\n", i + 1);
-                        printf("  Nome: %s\n", discos[i].nomeDoDisco);
-                        printf("  Numero de musicas: %d\n", discos[i].numeroDeMusicas);
-                        printf("  Nota do album: %.1f\n", discos[i].notaDoAlbum);
-                        printf("\n=====================================\n");
+                        printf("Disco %d:\n", i + 1);
+                        printf("Nome: %s\n", discos[i].nomeDoDisco);
+                        printf("Numero de musicas: %d\n", discos[i].numeroDeMusicas);
+                        printf("Nota do album: %.1f\n", discos[i].notaDoAlbum);
+                        printf("-----------------------------\n");
                     }
-                    printf("\n===== Discos listados com sucesso! ===== \n");
+                    free(discos); // Libera memória alocada para lista de discos
+                    printf("\n===== Discos listados com sucesso! =====\n");
+                }
+                else
+                {
+                    printf("Erro ao listar discos.\n");
                 }
             }
             break;
+
         case 6:
+            // Esvaziar todos os discos da coleção (mas mantém a coleção criada)
             if (minhaColecao == NULL)
             {
                 printf("Colecao não criada.\n");
@@ -164,6 +166,7 @@ int main()
             break;
 
         case 7:
+            // Sair do programa
             printf("Saindo do programa...\n");
             break;
 
@@ -171,13 +174,13 @@ int main()
             printf("Opcao invalida! Tente novamente...\n");
             break;
         }
-
     } while (opcao != 7);
 
-    // Liberando a memória da coleção ao final
+    // Limpa toda a memória usada pela coleção antes de sair
     if (minhaColecao != NULL)
     {
-        free(minhaColecao->discos);
+        esvaziarColecao(minhaColecao);
+        free(minhaColecao->elementos);
         free(minhaColecao);
     }
 
